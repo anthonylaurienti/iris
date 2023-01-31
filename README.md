@@ -1,0 +1,107 @@
+
+
+<table>
+  <tr>
+    <th>Endpoint</th>
+    <th>Method</th>
+    <th>Input</th>
+    <th>Output</th>
+    <th>Error</th>
+  </tr>
+  <tr>
+    <td>/</td>
+    <td>GET</td>
+    <td></td>
+    <td>
+      <table>
+        <tr>
+          <th>Key</th>
+          <th>Value</th>
+          <th>Type</th>
+        </tr>
+        <tr>
+          <td>message</td>
+          <td>Hello, World!</td>
+          <td>String</td>
+        </tr>
+      </table>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>/ping</td>
+    <td>GET</td>
+    <td></td>
+    <td>
+      <table>
+        <tr>
+          <th>Key</th>
+          <th>Value</th>
+          <th>Type</th>
+        </tr>
+        <tr>
+          <td>ip</td>
+          <td>&lt;Public IP&gt;</td>
+          <td>String</td>
+        </tr>
+      </table>
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>/sync_date</td>
+    <td>POST</td>
+    <td>
+      <table>
+        <tr>
+          <th>Key</th>
+          <th>Value</th>
+          <th>Type</th>
+        </tr>
+        <tr>
+          <td>deviceID</td>
+          <td></td>
+          <td>String</td>
+        </tr>
+        <tr>
+          <td>providerID</td>
+          <td></td>
+          <td>String</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <th>Key</th>
+          <th>Value</th>
+          <th>Type</th>
+        </tr>
+        <tr>
+          <td>&lt;depends on the sync data&gt;</td>
+          <td></td>
+          <td>Object</td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <th>HTTP Status Code</th>
+          <th>Error</th>
+        </tr>
+        <tr>
+          <td>404</td>
+          <td>No register found</td>
+        </tr>
+        <tr>
+          <td>500</td>
+          <td>&lt;Error Message&gt;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>/qrcode</td>
+    <td>GET</td>
+    <td
