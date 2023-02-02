@@ -34,7 +34,7 @@ const getWanIp = () => {
   let wanIp;
   for (const name of Object.keys(networkInts)) {
     for (const netInt of networkInts[name]) {
-      if (netInt.family === 'IPv4' && !netInt.internal) {
+      if (netInt.family === 'IPv4' && !netInt.internal && !name.includes("wg")) {
         wanIp = netInt.address;
         break;
       }
