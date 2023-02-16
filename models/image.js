@@ -4,7 +4,7 @@ const imageSchema = new mongoose.Schema({
   empty: Number,
   Pid: Number,
   Data: Number,
-  devID: Number,
+  devID: String,
   Type: String,
   sessionID: Number,
   Check: String,
