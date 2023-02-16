@@ -26,7 +26,12 @@ router.post("/sync_date", async (req, res) => {
     }
     res.json(lastSync);
   } catch (err) {
-    res.status(500).send(err.message);
+    res.statusMessage = err.message;
+    if(err.message==="No register found"){
+	res.status(404).end();
+    }else{
+    	res.status(500).end();
+    }
   }
 });
 
@@ -45,6 +50,7 @@ router.post('/images', multer.single('Image'), async (req, res) => {
     res.json({"state":"OK"});
   } catch (error) {
     console.log(error);
+    res.statusMessage = error.message;
     res.status(500).json({"ERROR":error})
   }
 });
@@ -65,7 +71,7 @@ router.post("/check", async (req, res) => {
     const { pid, sessionID, devID } = req.body;
     const images = await Image.find({ Pid:pid, sessionID, devID });
     const wanIp = await ImageService.getWanIp();
-    const imgs = images.map(image => wanIp+":"+port+image.Image).join(";");
+    const imgs = images.map(image => image.Image).join(";");
     res.json({ pid, imgs });
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -34,7 +34,7 @@ const getWanIp = () => {
   let wanIp;
   for (const name of Object.keys(networkInts)) {
     for (const netInt of networkInts[name]) {
-      if (netInt.family === 'IPv4' && !netInt.internal) {
+      if (netInt.family === 'IPv4' && !netInt.internal && name.includes("wlp")) {
         wanIp = netInt.address;
         break;
       }
@@ -45,7 +45,7 @@ const getWanIp = () => {
 
 const syncDate = async (deviceID, providerID) => {
   try {
-    const lastRegister = await Image.findOne({ devID: deviceID, Pid: providerID }).sort({createdAt: -1});
+    const lastRegister = await Image.findOne({ devID: deviceID }).sort({Data: -1});
     if (!lastRegister) {
       throw new Error("No register found");
     }
