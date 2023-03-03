@@ -2,13 +2,14 @@ const Image = require('../models/image');
 const qrcode = require('qrcode');
 const os = require('os');
 require('dotenv').config();
+const {saveimageData} = require("../repository/patient.repository")
 const port = process.env.IRIS_PORT || 3000
+const fs = require('fs');
 
-const saveImage = async (imageData) => {
+const saveImage = async (imageData,imageName) => {
   try {
-    const image = new Image(imageData);
-    const savedImage = await image.save();
-    return savedImage;
+    const filePath = `./images/${imageName}`;
+    saveimageData(imageData)
   } catch (error) {
     throw error;
   }

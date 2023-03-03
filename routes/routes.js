@@ -45,7 +45,7 @@ router.post('/images', multer.single('Image'), async (req, res) => {
   try {
     const result = await ImageService.saveImage({
       ...req.body,
-      Image: `/images/${req.file.filename}`
+      ImageName: req.file.filename,
     });
     res.json({"state":"OK"});
   } catch (error) {
