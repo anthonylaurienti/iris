@@ -20,11 +20,12 @@ router.get('/ping', async (req, res) => {
 router.post("/sync_date", async (req, res) => {
   try {
     const { deviceID, providerID } = req.body;
-    const lastSync = await ImageService.syncDate(deviceID, providerID);
-    if (!lastSync) {
-      return res.status(404).send({ error: "No register found" });
-    }
-    res.json(lastSync);
+    const lastSync = await ImageService.syncDate(deviceID, providerID,(lastSync)=>{
+      if (!lastSync) {
+        return res.status(404).send({ error: "No register found" });
+      }
+      res.json(lastSync);
+    });
   } catch (err) {
     res.statusMessage = err.message;
     if(err.message==="No register found"){
@@ -45,7 +46,7 @@ router.post('/images', multer.single('Image'), async (req, res) => {
   try {
     const result = await ImageService.saveImage({
       ...req.body,
-      Image: `/images/${req.file.filename}`
+      ImageName: req.file.filename,
     });
     res.json({"state":"OK"});
   } catch (error) {
@@ -69,10 +70,11 @@ router.get("/images/:fileName", (req, res) => {
 router.post("/check", async (req, res) => {
   try {
     const { pid, sessionID, devID } = req.body;
-    const images = await Image.find({ Pid:pid, sessionID, devID });
-    const wanIp = await ImageService.getWanIp();
-    const imgs = images.map(image => image.Image).join(";");
-    res.json({ pid, imgs });
+    ImageService.findImage(pid, sessionID, devID, async (images)=>{
+      const wanIp = await ImageService.getWanIp();
+      const imgs = images.map(image => image.Image).join(";");
+      res.json({ pid, imgs });
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

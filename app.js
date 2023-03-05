@@ -4,11 +4,13 @@ const router = require('./routes/routes');
 require('dotenv').config();
 const { connectToMongoDB } = require('./config/db');
 
+const {createTables} = require('./repository/patient.repository')
+
 const app = express();
 
 const port = process.env.IRIS_PORT || 3000
 
-connectToMongoDB();
+createTables();
 
 app.use(cors());
 app.use(express.json());
