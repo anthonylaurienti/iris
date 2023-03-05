@@ -1,8 +1,10 @@
 const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./db/irisDB');
+require('dotenv').config();
+const IRIS_DB = process.env.IRIS_DB || "irisDB"
+const db = new sqlite3.Database(`./db/${IRIS_DB}`);
 
 
-const tableModel = 'CREATE TABLE patients (id INT PRIMARY KEY AUTOINCREMENT, name TEXT )'
+const tableModel = 'CREATE TABLE patients (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT )'
 // need to rename the data, check and type fields becouse they are reserved
 const tableModelIMG = `CREATE TABLE images (
     id INTEGER PRIMARY KEY AUTOINCREMENT ,
