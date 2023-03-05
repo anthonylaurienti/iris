@@ -1,5 +1,4 @@
 const express = require('express');
-const Image = require('../models/image');
 const router = express.Router();
 const multer = require('../config/multer');
 const ImageService = require('../services/image.service');

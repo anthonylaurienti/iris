@@ -1,4 +1,3 @@
-const Image = require('../models/image');
 const qrcode = require('qrcode');
 const os = require('os');
 require('dotenv').config();
