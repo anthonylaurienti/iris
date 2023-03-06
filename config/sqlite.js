@@ -53,7 +53,6 @@ function DataExt(sql, callback) {
         rows.forEach((row,key)=>{
             rep.push(row);
             if(key == tamanho-1){
-                db.close();
                 return callback(false, rep);
             }
         });
