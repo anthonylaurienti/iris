@@ -4,7 +4,7 @@ function saveimageData(imageData,filePath){
     let sql = `insert into images VALUES(
         null,
         ${imageData.empty},
-        ${imageData.Pid},
+        '${imageData.Pid}',
         '${imageData.Data}',
         '${imageData.devID}',
         '${imageData.Type}',
@@ -25,7 +25,7 @@ function getLast(devId,callback){
         from
             images
         where 
-            devID = ${devId}
+            devID = '${devId}'
         order by DataSended DESC 
         limit 1`
     DataExt(sql, function(err, content) {
@@ -40,11 +40,11 @@ function getImages(pid,sessionID,devID,callback){
         from
           images
         where 
-          Pid = ${pid}
+          Pid = '${pid}'
           and 
             sessionID = ${sessionID}
           and 
-            devID = ${devID}` 
+            devID = '${devID}'` 
     DataExt(sql, function(err, content) {
         if(err) throw(err);
         callback(content)
